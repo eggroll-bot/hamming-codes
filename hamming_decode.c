@@ -161,6 +161,12 @@ static bool decode_and_write_to_file( uint64_t *total_bytes_processed, uint64_t 
 				corrected_errors++;
 			}
 
+			// Output 0 upon failure.
+			if ( lower_nibble_status == HAM_ERR || upper_nibble_status == HAM_ERR ) {
+				lower_nibble = 0;
+				upper_nibble = 0;
+			}
+
 			uint8_t reconstructed_byte = ( upper_nibble << 4 ) | lower_nibble;
 			int write_byte_result = fputc( reconstructed_byte, output_file );
 
