@@ -24,8 +24,8 @@ static BitMatrix *generator_matrix = NULL;
 // Nothing.
 static void print_help( char *program_path ) {
 	fprintf( stderr,
-	    "SYNOPSIS\n   A Hamming(8, 4) code generator.\n\nUSAGE\n   %s [-h] [-i infile] [-o outfile]\n\nOPTIONS\n   -h             Program usage and help.\n   -i infile      Input file to encode.\n   "
-	    "-o outfile     File to output encoded data to.\n",
+	    "SYNOPSIS\n   A Hamming(8, 4) code generator using matrix multiplication with memoization.\n\nUSAGE\n   %s [-h] [-i infile] [-o outfile]\n\nOPTIONS\n   -h             Program usage and "
+	    "help.\n   -i infile      Input file to encode.\n   -o outfile     File to output encoded data to.\n",
 	    program_path );
 }
 

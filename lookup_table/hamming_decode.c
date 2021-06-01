@@ -22,8 +22,8 @@ static FILE *output_file = NULL;
 // Nothing.
 static void print_help( char *program_path ) {
 	fprintf( stderr,
-	    "SYNOPSIS\n   A Hamming(8, 4) code decoder.\n\nUSAGE\n   %s [-hv] [-i infile] [-o outfile]\n\nOPTIONS\n   -h             Program usage and help.\n   -v             Print decoding statistics "
-	    "to stderr.\n   -i infile      Input file to decode.\n   -o outfile     File to output decoded data to.\n",
+	    "SYNOPSIS\n   A Hamming(8, 4) code decoder using a lookup table.\n\nUSAGE\n   %s [-hv] [-i infile] [-o outfile]\n\nOPTIONS\n   -h             Program usage and help.\n   -v             Print "
+	    "decoding statistics to stderr.\n   -i infile      Input file to decode.\n   -o outfile     File to output decoded data to.\n",
 	    program_path );
 }
 
