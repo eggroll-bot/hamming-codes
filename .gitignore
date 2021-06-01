@@ -1,0 +1,5 @@
+.vscode
+*.o
+*.out
+hamming_encode
+hamming_decode
