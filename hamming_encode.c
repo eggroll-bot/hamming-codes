@@ -115,7 +115,7 @@ static void initialize_generator_matrix( ) {
 // Nothing.
 //
 // Returns:
-// Nothing.
+// bool - Whether the data could be read, encoded, and written to the output file.
 static bool encode_and_write_to_file( ) {
 	uint32_t last_scan = 1;
 
