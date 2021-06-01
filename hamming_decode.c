@@ -112,11 +112,13 @@ static void initialize_h_transpose_matrix( ) {
 // Decodes input file two characters at a time and outputs the decoded data to the output file.
 //
 // Parameters:
-// Nothing.
+// uint64_t *total_bytes_processed - A pointer to the counter for total number of bytes processed.
+// uint64_t *uncorrectable_errors - A pointer to the counter for uncorrectable errors.
+// uint64_t *corrected_errors - A pointer to the counter for corrected errors.
 //
 // Returns:
 // bool - Whether the data could be read, decoded, and written to the output file.
-static bool decode_and_write_to_file( uint64_t *total_bytes_processed, uint64_t *uncorrected_errors, uint64_t *corrected_errors ) {
+static bool decode_and_write_to_file( uint64_t *total_bytes_processed, uint64_t *uncorrectable_errors, uint64_t *corrected_errors ) {
 	uint8_t lower_nibble = 0;
 	uint8_t upper_nibble = 0;
 	uint32_t last_scan = 1;
@@ -145,7 +147,7 @@ static bool decode_and_write_to_file( uint64_t *total_bytes_processed, uint64_t 
 			HAM_STATUS lower_nibble_status = ham_decode( ht_matrix, first_byte, &lower_nibble );
 
 			if ( lower_nibble_status == HAM_ERR ) {
-				uncorrected_errors++;
+				uncorrectable_errors++;
 			} else if ( lower_nibble_status == HAM_CORRECT ) {
 				corrected_errors++;
 			}
@@ -154,7 +156,7 @@ static bool decode_and_write_to_file( uint64_t *total_bytes_processed, uint64_t 
 			HAM_STATUS upper_nibble_status = ham_decode( ht_matrix, second_byte, &upper_nibble );
 
 			if ( upper_nibble_status == HAM_ERR ) {
-				uncorrected_errors++;
+				uncorrectable_errors++;
 			} else if ( upper_nibble_status == HAM_CORRECT ) {
 				corrected_errors++;
 			}
@@ -208,17 +210,17 @@ int main( int argc, char **argv ) {
 
 	initialize_h_transpose_matrix( );
 	uint64_t total_bytes_processed = 0;
-	uint64_t uncorrected_errors = 0;
+	uint64_t uncorrectable_errors = 0;
 	uint64_t corrected_errors = 0;
 
-	if ( !decode_and_write_to_file( &total_bytes_processed, &uncorrected_errors, &corrected_errors ) ) {
+	if ( !decode_and_write_to_file( &total_bytes_processed, &uncorrectable_errors, &corrected_errors ) ) {
 		return 1;
 	}
 
 	if ( verbose ) {
-		double error_rate = ( double ) uncorrected_errors / total_bytes_processed;
+		double error_rate = ( double ) uncorrectable_errors / total_bytes_processed;
 		fprintf( stderr, "Total bytes processed: %" PRIu64 "\n", total_bytes_processed );
-		fprintf( stderr, "Uncorrected errors: %" PRIu64 "\n", uncorrected_errors );
+		fprintf( stderr, "Uncorrectable errors: %" PRIu64 "\n", uncorrectable_errors );
 		fprintf( stderr, "Corrected errors: %" PRIu64 "\n", corrected_errors );
 		fprintf( stderr, "Error rate: %f\n", error_rate );
 	}
