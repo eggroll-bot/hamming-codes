@@ -1,6 +1,12 @@
 # Hamming Codes
 
-Contains two Hamming(8, 4) code encoder and decoder implementations. The encoders and decoders will read from stdin and output to stdout by default, but flags can be specified to make it read from or output to specified files instead. The encoder and decoder in the `lookup_table` folder uses a lookup table to encode and decode Hamming(8, 4) codes. The encoder and decoder in the `matrix_multiplication` folder uses matrix multiplication with memoization to encode and decode Hamming(8, 4) codes. The matrix multiplication encoder and decoder was used to generate the lookup tables for the lookup table encoder and decoder.
+Contains two Hamming(8, 4) code encoder and decoder implementations.
+
+The encoders and decoders will read from stdin and output to stdout by default, but flags can be specified to make it read from or output to specified files instead.
+
+The encoder and decoder in the `lookup_table` folder uses a lookup table to encode and decode Hamming(8, 4) codes.
+
+The encoder and decoder in the `matrix_multiplication` folder uses matrix multiplication with memoization to encode and decode Hamming(8, 4) codes. This encoder and decoder was used to generate the lookup tables for the lookup table encoder and decoder.
 
 Adapted from a Computer Systems and C Programming course assignment.
 
