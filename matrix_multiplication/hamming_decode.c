@@ -138,27 +138,27 @@ static bool decode_and_write_to_file( uint64_t *total_bytes_processed, uint64_t 
 			last_scan = 0;
 		} else if ( second_input_get_result == EOF ) {
 			last_scan = 0;
-			total_bytes_processed++;
+			*total_bytes_processed += 1;
 		} else {
-			total_bytes_processed += 2;
+			*total_bytes_processed += 2;
 			uint8_t first_byte = first_input_get_result;
 			uint8_t second_byte = second_input_get_result;
 			// Decode lower nibble.
 			HAM_STATUS lower_nibble_status = ham_decode( ht_matrix, first_byte, &lower_nibble );
 
 			if ( lower_nibble_status == HAM_ERR ) {
-				uncorrectable_errors++;
+				*uncorrectable_errors += 1;
 			} else if ( lower_nibble_status == HAM_CORRECT ) {
-				corrected_errors++;
+				*corrected_errors += 1;
 			}
 
 			// Decode upper nibble.
 			HAM_STATUS upper_nibble_status = ham_decode( ht_matrix, second_byte, &upper_nibble );
 
 			if ( upper_nibble_status == HAM_ERR ) {
-				uncorrectable_errors++;
+				*uncorrectable_errors += 1;
 			} else if ( upper_nibble_status == HAM_CORRECT ) {
-				corrected_errors++;
+				*corrected_errors += 1;
 			}
 
 			// Output 0 upon failure.
