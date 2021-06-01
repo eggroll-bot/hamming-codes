@@ -1,13 +1,17 @@
-CC = clang
-CFLAGS = -Wall -Wextra -Werror -Wpedantic -Ofast
-LDFLAGS = -flto -Ofast
+.PHONY: all debug clean format
 
-.PHONY: all
+all: lookup_table matrix_multiplication
+	$(MAKE) -C lookup_table all
+	$(MAKE) -C matrix_multiplication all
 
-all: lookup_table/hamming_encode lookup_table/hamming_decode matrix_multiplication/hamming_encode matrix_multiplication/hamming_decode
+debug: lookup_table matrix_multiplication
+	$(MAKE) -C lookup_table debug
+	$(MAKE) -C matrix_multiplication debug
 
-lookup_table/hamming_encode lookup_table/hamming_decode:
-	$(MAKE) -C lookup_table
+clean: lookup_table matrix_multiplication
+	$(MAKE) -C lookup_table clean
+	$(MAKE) -C matrix_multiplication clean
 
-matrix_multiplication/hamming_encode matrix_multiplication/hamming_decode:
-	$(MAKE) -C matrix_multiplication
+format: lookup_table matrix_multiplication
+	$(MAKE) -C lookup_table format
+	$(MAKE) -C matrix_multiplication format
