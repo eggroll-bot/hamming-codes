@@ -45,7 +45,7 @@ uint8_t ham_encode( BitMatrix *g, uint8_t msg ) {
 // HAM_STATUS - Whether the hamming code could be successfully decoded.
 HAM_STATUS ham_decode( BitMatrix *ht, uint8_t code, uint8_t *msg ) {
 	// Array used to cache error syndrome calculations.
-	static uint16_t error_syndrome_calculate_lookup[ 256 ] = { 0 };
+	static uint8_t error_syndrome_calculate_lookup[ 256 ] = { 0 };
 	// Lookup table for corrections to make with a certain error syndrome.
 	static const int8_t error_syndrome_corrections[] = { HAM_OK, 4, 5, HAM_ERR, 6, HAM_ERR, HAM_ERR, 3, 7, HAM_ERR, HAM_ERR, 2, HAM_ERR, 1, 0, HAM_ERR };
 	uint8_t error_syndrome = 0;
